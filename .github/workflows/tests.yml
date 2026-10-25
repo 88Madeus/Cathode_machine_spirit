@@ -1,0 +1,40 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  linux:
+    # ubuntu-22.04: на нём ещё есть Python 3.8 (минимальная версия для лабораторных ноутбуков)
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.8", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Зависимости
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq xvfb
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+      - name: Тесты (движок, экспорт, LAN через эмулятор, окно под xvfb)
+        run: xvfb-run -a python -m pytest -q
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Зависимости
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+      - name: Тесты без окна (пути и кодировки Windows)
+        run: python -m pytest -q -m "not gui"
