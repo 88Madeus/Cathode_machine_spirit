@@ -1,0 +1,22 @@
+# журналы сессий и локальные настройки — у каждого компьютера свои
+logs/
+pr8_cathode_settings.json
+pr8_cathode_settings.json.tmp
+*.csv
+*.xlsx
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+wheels/
+
+# IDE / ОС
+.idea/
+.vscode/
+.spyproject/
+.DS_Store
+Thumbs.db
+desktop.ini
