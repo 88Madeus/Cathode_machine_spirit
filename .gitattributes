@@ -5,3 +5,4 @@
 *.txt  text eol=lf
 *.bat  text eol=crlf
 *.png  binary
+*.xlsx binary

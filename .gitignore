@@ -5,6 +5,13 @@ pr8_cathode_settings.json.tmp
 *.csv
 *.xlsx
 
+# исключения: оцифровка протоколов ручных нагревов и журналы испытаний на приборе
+!docs/protocols/*.xlsx
+!runs/**/*.csv
+!runs/**/*.xlsx
+# временные файлы Excel рядом с открытой книгой
+~$*
+
 # Python
 __pycache__/
 *.py[cod]
